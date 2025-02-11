@@ -1,0 +1,16 @@
+---
+// src/components/Section.astro
+interface Props {
+  id?: string;
+  title: string;
+  emoji?: string;
+  className?: string;
+}
+
+const { id, title, emoji, className = "mb-16" } = Astro.props;
+---
+
+<section id={id} class={className}>
+  <h2 class="text-3xl font-bold mb-8">{emoji && `${emoji} `}{title}</h2>
+  <slot />
+</section>

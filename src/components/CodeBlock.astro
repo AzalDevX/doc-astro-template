@@ -1,0 +1,42 @@
+---
+// src/components/CodeBlock.astro
+interface Props {
+  code: string;
+  language?: string;
+  className?: string;
+}
+
+const { code, language = "bash", className = "" } = Astro.props;
+---
+
+<div class={`relative group ${className}`}>
+  <div class="absolute top-0 left-0 right-0 flex items-center justify-between px-4 py-2 bg-gray-800/50 backdrop-blur-sm rounded-t-lg">
+    <div class="flex space-x-2">
+      <div class="w-3 h-3 rounded-full bg-red-500"></div>
+      <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+      <div class="w-3 h-3 rounded-full bg-green-500"></div>
+    </div>
+    <button
+      class="copy-button opacity-0 group-hover:opacity-100 transition-opacity bg-white/10 hover:bg-white/20 px-2 py-1 rounded text-sm text-white"
+      data-code={code}
+    >
+      Copiar
+    </button>
+  </div>
+  <pre class="bg-gray-900 text-gray-100 p-4 pt-12 rounded-lg overflow-x-auto"><code>{code}</code></pre>
+</div>
+
+<script>
+  document.querySelectorAll('.copy-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const code = button.getAttribute('data-code');
+      if (code) {
+        navigator.clipboard.writeText(code);
+        button.textContent = '¡Copiado!';
+        setTimeout(() => {
+          button.textContent = 'Copiar';
+        }, 2000);
+      }
+    });
+  });
+</script>

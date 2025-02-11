@@ -1,0 +1,30 @@
+---
+// src/components/Navigation.astro
+const sections = [
+  { id: "caracteristicas", emoji: "✨", title: "Características" },
+  { id: "requisitos", emoji: "🚀", title: "Requisitos Previos" },
+  { id: "instalacion", emoji: "📥", title: "Instalación" },
+  { id: "uso", emoji: "🎮", title: "Uso" },
+  { id: "estructura", emoji: "📁", title: "Estructura del Proyecto" },
+  { id: "comandos", emoji: "⌨️", title: "Comandos" },
+  { id: "problemas", emoji: "❓", title: "Solución de Problemas" },
+  { id: "contribuir", emoji: "🤝", title: "Contribuir" },
+  { id: "licencia", emoji: "📄", title: "Licencia" }
+];
+---
+
+<nav class="hidden lg:block sticky top-4 w-64 h-[calc(100vh-2rem)] overflow-y-auto">
+  <ul class="space-y-2">
+    {sections.map(({ id, emoji, title }) => (
+      <li>
+        <a
+          href={`#${id}`}
+          class="block px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+        >
+          <span class="mr-2">{emoji}</span>
+          {title}
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

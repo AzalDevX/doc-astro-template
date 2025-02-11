@@ -1,41 +1,228 @@
 ---
+// src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import CodeBlock from '../components/CodeBlock.astro';
+
+const badges = [
+  {
+    src: "https://img.shields.io/badge/Astro-FF5D01?logo=astro&logoColor=white",
+    alt: "Astro Badge",
+    href: "https://astro.build"
+  },
+  {
+    src: "https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white",
+    alt: "Tailwind CSS Badge",
+    href: "https://tailwindcss.com"
+  },
+  {
+    src: "https://img.shields.io/badge/GitHub_CLI-181717?logo=github&logoColor=white",
+    alt: "GitHub CLI Badge",
+    href: "https://cli.github.com"
+  }
+];
+
+const requirements = [
+  {
+    name: "Node.js",
+    version: "v14.16.0+",
+    url: "https://nodejs.org/"
+  },
+  {
+    name: "Git",
+    url: "https://git-scm.com/"
+  },
+  {
+    name: "GitHub CLI",
+    url: "https://cli.github.com/"
+  }
+];
+
+const commonErrors = [
+  {
+    error: "Error: Command not found 'gh'",
+    title: "GitHub CLI no está instalado",
+    solution: `# Windows (winget)
+winget install GitHub.cli
+
+# macOS
+brew install gh
+
+# Linux (Ubuntu/Debian)
+sudo apt install gh`
+  },
+  {
+    error: "Error: Not authenticated",
+    title: "No autenticado en GitHub",
+    description: "Necesitas autenticarte con GitHub CLI antes de usar create-astro-template:",
+    solution: "gh auth login"
+  },
+  {
+    error: "Error: Git not configured",
+    title: "Git no configurado",
+    description: "Configura tu nombre de usuario y email en Git:",
+    solution: 'git config --global user.name "Tu Nombre"\ngit config --global user.email "tu@email.com"'
+  }
+];
 ---
 
-<Layout title="Astro + TailwindCSS Template">
-  <main class="max-w-4xl mx-auto p-6 pt-16">
-    <h1 class="text-text-primary text-5xl font-extrabold text-center mb-8">Bienvenido a <strong class="text-purple-300">Astro</strong> + <strong class="text-teal-300">TailwindCSS</strong></h1>
-    <p class="text-center text-xl mb-12">
-      ¡Empieza con <code class="bg-code-background border-1 border-code-border px-2 py-1 rounded-md">src/pages</code> para codear!<br />
-      <strong class="text-accent-primary">Objetivo:</strong> Facilitar la creación de proyectos combinados con ambas tecnologías.
-    </p>
-    <ul role="list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <Card
-        href="https://astro.build/"
-        title="Inicia tu Proyecto"
-        body="Comienza a desarrollar tu idea usando este template como base. ¡Explora las posibilidades!"
-      />
-      <Card
-        href="https://docs.astro.build/en/getting-started/"
-        title="Documentación"
-        body="Aprende a integrar nuevas funcionalidades, y consulta las guías para personalizar el template."
-      />
-      <Card
-        href="https://tailwindcss.com/docs/guides/astro"
-        title="Aprende Astro y TailwindCSS"
-        body="Descubre cómo aprovechar al máximo Astro y TailwindCSS en tus proyectos."
-      />
-      <Card
-        href="https://github.com/azaldevx/astro-template"
-        title="Contribuir al Proyecto"
-        body="¿Tienes ideas o mejoras? Colabora en el desarrollo de este template en GitHub."
-      />
-    </ul>
-  </main>
+<Layout title="Create Astro Template">
+  <!-- Hero Section -->
+  <div class="relative overflow-hidden min-h-screen">
+    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-pink-500/10 blur-3xl"></div>
+    <div class="relative max-w-7xl mx-auto px-4 pt-20 pb-16 sm:px-6 lg:px-8 lg:pt-32">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent pb-2">
+          Create Astro Template
+        </h1>
+        <p class="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          CLI futurista para crear proyectos Astro con integración automática de GitHub.
+        </p>
+        
+        <div class="mt-8 flex justify-center gap-3">
+          {badges.map(badge => (
+            <a href={badge.href} target="_blank" rel="noopener" class="hover:opacity-80 transition-opacity">
+              <img src={badge.src || "/placeholder.svg"} alt={badge.alt} />
+            </a>
+          ))}
+        </div>
 
-  <footer class="mt-12 text-center text-footer">
-    <p>Creado por <a href="https://www.linkedin.com/in/azaldev" class="text-accent-primary hover:underline">AzalDevX</a> - 
-    <a href="https://github.com/azaldevx/astro-template" class="text-accent-primary hover:underline">GitHub</a></p>
-  </footer>
+        <div class="mt-12">
+          <CodeBlock 
+            code="npx create-astro-template my-project" 
+            language="bash"
+            className="max-w-lg mx-auto text-lg"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 py-16">
+    <!-- Requirements -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-8">Requisitos Previos</h2>
+      <div class="grid sm:grid-cols-3 gap-6">
+        {requirements.map(({ name, version, url }) => (
+          <a 
+            href={url}
+            target="_blank"
+            rel="noopener"
+            class="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
+          >
+            <h3 class="font-semibold text-xl mb-2 group-hover:text-blue-500 transition-colors">
+              {name}
+            </h3>
+            {version && <p class="text-gray-600 dark:text-gray-400">{version}</p>}
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Quick Start -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-8">Inicio Rápido</h2>
+      <div class="space-y-6">
+        <div class="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+          <div class="p-6">
+            <h3 class="font-semibold text-xl mb-4">1. Crear nuevo proyecto</h3>
+            <CodeBlock code="npx create-astro-template my-project" />
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+          <div class="p-6">
+            <h3 class="font-semibold text-xl mb-4">2. Navegar al directorio</h3>
+            <CodeBlock code="cd my-project" />
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+          <div class="p-6">
+            <h3 class="font-semibold text-xl mb-4">3. Iniciar desarrollo</h3>
+            <CodeBlock code="npm run dev" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Errors -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-8">Solución de Problemas</h2>
+      <div class="space-y-6">
+        {commonErrors.map(({ error, title, description, solution }) => (
+          <div class="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+            <div class="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 px-6 py-3">
+              <span class="text-red-500 font-mono text-sm">{error}</span>
+            </div>
+            <div class="p-6">
+              <h3 class="font-semibold text-xl mb-4">{title}</h3>
+              <div class="space-y-4">
+                {description && (
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">
+                    {description}
+                  </p>
+                )}
+                <CodeBlock code={solution} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-8">Características Principales</h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+          <div class="text-2xl mb-4">🎨</div>
+          <h3 class="font-semibold text-xl mb-2">Template Moderno</h3>
+          <p class="text-gray-600 dark:text-gray-400">
+            Astro + Tailwind CSS preconfigurado y listo para usar.
+          </p>
+        </div>
+        <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+          <div class="text-2xl mb-4">🔄</div>
+          <h3 class="font-semibold text-xl mb-2">Integración GitHub</h3>
+          <p class="text-gray-600 dark:text-gray-400">
+            Configuración automática de repositorios con GitHub CLI.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section>
+      <h2 class="text-3xl font-bold mb-8">Siguientes Pasos</h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <a 
+          href="https://docs.astro.build" 
+          target="_blank"
+          rel="noopener"
+          class="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
+        >
+          <h3 class="font-semibold text-xl mb-2 group-hover:text-blue-500 transition-colors">
+            📚 Documentación
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400">
+            Aprende más sobre Astro en la documentación oficial.
+          </p>
+        </a>
+        <a 
+          href="https://github.com/AzalDevX/create-astro-template"
+          target="_blank"
+          rel="noopener"
+          class="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
+        >
+          <h3 class="font-semibold text-xl mb-2 group-hover:text-blue-500 transition-colors">
+            ⭐ GitHub
+          </h3>
+          <p class="text-gray-600 dark:text-gray-400">
+            Dale una estrella al proyecto en GitHub.
+          </p>
+        </a>
+      </div>
+    </section>
+  </main>
 </Layout>
