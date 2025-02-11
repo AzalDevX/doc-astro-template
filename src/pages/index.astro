@@ -63,6 +63,36 @@ sudo apt install gh`
     solution: 'git config --global user.name "Tu Nombre"\ngit config --global user.email "tu@email.com"'
   }
 ];
+
+const features = [
+  {
+    icon: "🎨",
+    title: "Template Moderno",
+    description: "Astro + Tailwind CSS preconfigurado y listo para usar."
+  },
+  {
+    icon: "🔄",
+    title: "Integración GitHub",
+    description: "Configuración automática de repositorios con GitHub CLI."
+  }
+];
+
+const nextSteps = [
+  {
+    icon: "📚",
+    title: "Documentación",
+    description: "Aprende más sobre Astro en la documentación oficial.",
+    href: "https://docs.astro.build",
+    gradient: "from-purple-500 to-blue-600"
+  },
+  {
+    icon: "⭐",
+    title: "GitHub",
+    description: "Dale una estrella al proyecto en GitHub.",
+    href: "https://github.com/AzalDevX/create-astro-template",
+    gradient: "from-pink-500 to-purple-600"
+  }
+];
 ---
 
 <Layout title="Create Astro Template">
@@ -71,14 +101,26 @@ sudo apt install gh`
     <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-blue-500/10 to-pink-500/10 blur-3xl"></div>
     <div class="relative max-w-7xl mx-auto px-4 pt-20 pb-16 sm:px-6 lg:px-8 lg:pt-32">
       <div class="text-center">
-        <h1 class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent pb-2">
-          Create Astro Template
+        <h1 
+          class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent pb-2"
+          data-aos="zoom-in"
+        >
+          Create Astro Template 
         </h1>
-        <p class="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        <p class="bg-gradient-to-r from-purple-800 via-blue-800 to-pink-800 bg-clip-text text-transparent">by AzalDevX</p>
+        <p 
+          class="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
           CLI futurista para crear proyectos Astro con integración automática de GitHub.
         </p>
         
-        <div class="mt-8 flex justify-center gap-3">
+        <div 
+          class="mt-8 flex justify-center gap-3"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
           {badges.map(badge => (
             <a href={badge.href} target="_blank" rel="noopener" class="hover:opacity-80 transition-opacity">
               <img src={badge.src || "/placeholder.svg"} alt={badge.alt} />
@@ -86,7 +128,11 @@ sudo apt install gh`
           ))}
         </div>
 
-        <div class="mt-12 mb-16">
+        <div 
+          class="mt-12 mb-16"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
           <CodeBlock 
             code="npx create-astro-template" 
             language="bash"
@@ -96,7 +142,6 @@ sudo apt install gh`
       </div>
     </div>
     
-    <!-- Wave Separator -->
     <WaveSeparator />
   </div>
 
@@ -104,17 +149,24 @@ sudo apt install gh`
   <main class="bg-white dark:bg-gray-900 relative z-10">
     <div class="max-w-4xl mx-auto px-4 py-16">
       <!-- Requirements -->
-      <section class="mb-16">
-        <h2 class="text-3xl font-bold mb-8">Requisitos Previos</h2>
+      <section class="mb-24">
+        <h2 
+          class="text-3xl font-bold mb-8"
+          data-aos="fade-up"
+        >
+          Requisitos Previos
+        </h2>
         <div class="grid sm:grid-cols-3 gap-6">
-          {requirements.map(({ name, version, url }) => (
+          {requirements.map(({ name, version, url }, index) => (
             <a 
               href={url}
               target="_blank"
               rel="noopener"
-              class="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+              class="p-6 rounded-xl bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300"
             >
-              <h3 class="font-semibold text-xl mb-2 group-hover:text-blue-500 transition-colors">
+              <h3 class="font-semibold text-xl mb-2">
                 {name}
               </h3>
               {version && <p class="text-gray-600 dark:text-gray-400">{version}</p>}
@@ -124,38 +176,48 @@ sudo apt install gh`
       </section>
 
       <!-- Quick Start -->
-      <section class="mb-16">
-        <h2 class="text-3xl font-bold mb-8">Inicio Rápido</h2>
+      <section class="mb-24">
+        <h2 
+          class="text-3xl font-bold mb-8"
+          data-aos="fade-up"
+        >
+          Inicio Rápido
+        </h2>
         <div class="space-y-6">
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-            <div class="p-6">
-              <h3 class="font-semibold text-xl mb-4">1. Crear nuevo proyecto</h3>
-              <CodeBlock code="npx create-astro-template" />
+          {[
+            { title: "1. Crear nuevo proyecto", code: "npx create-astro-template" },
+            { title: "2. Navegar al directorio", code: "cd my-project" },
+            { title: "3. Iniciar desarrollo", code: "npm run dev" }
+          ].map((step, index) => (
+            <div 
+              class="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              <div class="p-6">
+                <h3 class="font-semibold text-xl mb-4">{step.title}</h3>
+                <CodeBlock code={step.code} />
+              </div>
             </div>
-          </div>
-
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-            <div class="p-6">
-              <h3 class="font-semibold text-xl mb-4">2. Navegar al directorio</h3>
-              <CodeBlock code="cd my-project" />
-            </div>
-          </div>
-
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-            <div class="p-6">
-              <h3 class="font-semibold text-xl mb-4">3. Iniciar desarrollo</h3>
-              <CodeBlock code="npm run dev" />
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
       <!-- Common Errors -->
-      <section class="mb-16">
-        <h2 class="text-3xl font-bold mb-8">Solución de Problemas</h2>
+      <section class="mb-24">
+        <h2 
+          class="text-3xl font-bold mb-8"
+          data-aos="fade-up"
+        >
+          Solución de Problemas
+        </h2>
         <div class="space-y-6">
-          {commonErrors.map(({ error, title, description, solution }) => (
-            <div class="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+          {commonErrors.map(({ error, title, description, solution }, index) => (
+            <div 
+              class="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
               <div class="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 px-6 py-3">
                 <span class="text-red-500 font-mono text-sm">{error}</span>
               </div>
@@ -176,56 +238,69 @@ sudo apt install gh`
       </section>
 
       <!-- Features -->
-      <section class="mb-16">
-        <h2 class="text-3xl font-bold mb-8">Características Principales</h2>
+      <section class="mb-24">
+        <h2 
+          class="text-3xl font-bold mb-8"
+          data-aos="fade-up"
+        >
+          Características Principales
+        </h2>
         <div class="grid sm:grid-cols-2 gap-6">
-          <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800">
-            <div class="text-2xl mb-4">🎨</div>
-            <h3 class="font-semibold text-xl mb-2">Template Moderno</h3>
-            <p class="text-gray-600 dark:text-gray-400">
-              Astro + Tailwind CSS preconfigurado y listo para usar.
-            </p>
-          </div>
-          <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-800">
-            <div class="text-2xl mb-4">🔄</div>
-            <h3 class="font-semibold text-xl mb-2">Integración GitHub</h3>
-            <p class="text-gray-600 dark:text-gray-400">
-              Configuración automática de repositorios con GitHub CLI.
-            </p>
-          </div>
+          {features.map((feature, index) => (
+            <div 
+              class="p-6 rounded-xl bg-gray-50 dark:bg-gray-800/50"
+              data-aos={index === 0 ? "fade-right" : "fade-left"}
+            >
+              <div class="text-2xl mb-4">{feature.icon}</div>
+              <h3 class="font-semibold text-xl mb-2">{feature.title}</h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                {feature.description}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      <!-- Next Steps -->
+      <!-- Next Steps (CTAs) -->
       <section>
-        <h2 class="text-3xl font-bold mb-8">Siguientes Pasos</h2>
+        <h2 
+          class="text-3xl font-bold mb-8"
+          data-aos="fade-up"
+        >
+          Siguientes Pasos
+        </h2>
         <div class="grid sm:grid-cols-2 gap-6">
-          <a 
-            href="https://docs.astro.build" 
-            target="_blank"
-            rel="noopener"
-            class="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
-          >
-            <h3 class="font-semibold text-xl mb-2 group-hover:text-blue-500 transition-colors">
-              📚 Documentación
-            </h3>
-            <p class="text-gray-600 dark:text-gray-400">
-              Aprende más sobre Astro en la documentación oficial.
-            </p>
-          </a>
-          <a 
-            href="https://github.com/AzalDevX/create-astro-template"
-            target="_blank"
-            rel="noopener"
-            class="group p-6 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-blue-500 dark:hover:border-blue-500 transition-colors"
-          >
-            <h3 class="font-semibold text-xl mb-2 group-hover:text-blue-500 transition-colors">
-              ⭐ GitHub
-            </h3>
-            <p class="text-gray-600 dark:text-gray-400">
-              Dale una estrella al proyecto en GitHub.
-            </p>
-          </a>
+          {nextSteps.map((step, index) => (
+            <a 
+              href={step.href}
+              target="_blank"
+              rel="noopener"
+              data-aos={index === 0 ? "zoom-in-right" : "zoom-in-left"}
+              class={`group relative overflow-hidden p-8 rounded-xl bg-gradient-to-br ${step.gradient} text-white shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1`}
+            >
+              <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+              <h3 class="font-semibold text-2xl mb-3 flex items-center gap-2">
+                {step.icon} {step.title}
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  class="h-6 w-6 transform group-hover:translate-x-1 transition-transform duration-300" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    stroke-width="2" 
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
+              </h3>
+              <p class="text-white/90">
+                {step.description}
+              </p>
+            </a>
+          ))}
         </div>
       </section>
     </div>
